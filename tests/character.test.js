@@ -1,26 +1,32 @@
 const { createCharacter } = require('../src/character')
 
-describe('a character should', () => {
-    test('be born alive', () => {
-        expect(createCharacter().isAlive).toBe(true)
+describe('a character', () => {
+    describe('when born', () => {
+        test('is alive', () => {
+            expect(createCharacter().isAlive).toBe(true)
+        })
+
+        test('has 1000 health', () => {
+            expect(createCharacter().health).toBe(1000)
+        })
+
+        test('is level 1', () => {
+            expect(createCharacter().level).toBe(1)
+        })
     })
 
-    test('be born with 1000 health', () => {
-        expect(createCharacter().health).toBe(1000)
+    describe('when damaging another character', () => {
+        test('health is subtracted from the other character', () => {
+            const aragorn = createCharacter()
+            const gimli = createCharacter()
+
+            aragorn.damages(gimli, 50)
+
+            expect(gimli.health).toBe(950)
+        })
     })
 
-    test('be born with level 1', () => {
-        expect(createCharacter().level).toBe(1)
-    })
 
-    test('deal damage to another player', () => {
-        const character1 = createCharacter()
-        const character2 = createCharacter()
-
-        character1.attacks(character2, 50)
-
-        expect(character2.health).toBe(950)
-    })
 })
 
 

@@ -3,7 +3,7 @@ const createCharacter = () => {
         isAlive: true,
         health: 1000,
         level: 1,
-        attacks: (target, damage) => {
+        damages: (target, damage) => {
             target.health -= damage
         }
     }
