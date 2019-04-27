@@ -23,6 +23,16 @@ describe('a character', () => {
             aragorn.damages(gimli, 50)
 
             expect(gimli.health).toBe(950)
+            expect(gimli.isAlive).toBe(true)
+        })
+
+        test('with more damage than their health they die', () => {
+            const aragorn = createCharacter()
+            const gimli = createCharacter()
+
+            aragorn.damages(gimli, 1001)
+
+            expect(gimli.isAlive).toBe(false)
         })
     })
 
