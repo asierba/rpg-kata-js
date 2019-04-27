@@ -3,11 +3,11 @@ const { createCharacter } = require('../src/character')
 describe('a character', () => {
     describe('when born', () => {
         test('is alive', () => {
-            expect(createCharacter().isAlive).toBe(true)
+            expect(createCharacter().isAlive()).toBe(true)
         })
 
         test('has 1000 health', () => {
-            expect(createCharacter().health).toBe(1000)
+            expect(createCharacter().getHealth()).toBe(1000)
         })
 
         test('is level 1', () => {
@@ -16,23 +16,26 @@ describe('a character', () => {
     })
 
     describe('when damaging another character', () => {
-        test('health is subtracted from the other character', () => {
-            const aragorn = createCharacter()
-            const gimli = createCharacter()
+        let aragorn
+        let gimli
 
+        beforeEach(() => {
+            aragorn = createCharacter()
+            gimli = createCharacter()
+        })
+
+        test('health is subtracted from the other character', () => {
             aragorn.damages(gimli, 50)
 
-            expect(gimli.health).toBe(950)
-            expect(gimli.isAlive).toBe(true)
+            expect(gimli.getHealth()).toBe(950)
+            expect(gimli.isAlive()).toBe(true)
         })
 
         test('with more damage than their health they die', () => {
-            const aragorn = createCharacter()
-            const gimli = createCharacter()
-
             aragorn.damages(gimli, 1001)
 
-            expect(gimli.isAlive).toBe(false)
+            expect(gimli.isAlive()).toBe(false)
+            expect(gimli.getHealth()).toBe(0)
         })
     })
 
