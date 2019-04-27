@@ -5,6 +5,7 @@ const createCharacter = () => {
         level: 1,
         damages: (target, damage) => {
             target.health -= damage
+            target.isAlive = target.health > 0
         }
     }
 }
