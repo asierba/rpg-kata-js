@@ -1,5 +1,5 @@
 const createCharacter = () => {
-    return { isAlive: true }
+    return { isAlive: true, health: 1000 }
 }
 
 module.exports = { createCharacter }
