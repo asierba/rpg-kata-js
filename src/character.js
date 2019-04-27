@@ -1,11 +1,15 @@
 const createCharacter = () => {
+    let health = 1000
+
     return {
-        isAlive: true,
-        health: 1000,
+        isAlive: () => health > 0,
+        getHealth: () => health,
+        setHealth: value => {
+            health = value < 0 ? 0 : value;
+        },
         level: 1,
         damages: (target, damage) => {
-            target.health -= damage
-            target.isAlive = target.health > 0
+            target.setHealth(target.getHealth() - damage)
         }
     }
 }
