@@ -10,28 +10,31 @@ const createCharacter = (level = 1) => {
         health = value
     }
 
+    const adjustDamage = (attacker, defender, damage) => {
+        if (defender.overpowers(attacker)) {
+            return damage * 0.5
+        }
+        if (attacker.overpowers(defender)) {
+            return damage * 1.5
+        }
+        return damage
+    }
+
     const getHealth = () => health;
     return {
         isAlive,
         getHealth,
         setHealth,
         level,
-        overpowers (target) {
-            return this.level - target.level >= 5
+        overpowers (other) {
+            return this.level - other.level >= 5
         },
-        damages (target, damage) {
-            if (this === target) {
+        damages (other, damage) {
+            if (this === other) {
                 return
             }
-
-            if (target.overpowers(this)) {
-                damage = damage / 2
-            }
-            if (this.overpowers(target)) {
-                damage = damage * 1.5
-            }
-
-            target.setHealth(Math.max(MIN_HEALTH, target.getHealth() - damage))
+            const newHealth = other.getHealth() - adjustDamage(this, other, damage);
+            other.setHealth(Math.max(MIN_HEALTH, newHealth))
         },
         heals: (amountToHeal) => {
             if (isAlive()) {
