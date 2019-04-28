@@ -10,16 +10,17 @@ const createCharacter = () => {
         isAlive,
         getHealth: () => health,
         setHealth: value => {
-            if (isAlive()) {
-                health = value
-            }
+            health = value
         },
         level: 1,
         damages: (target, damage) => {
             target.setHealth(Math.max(MIN_HEALTH, target.getHealth() - damage))
         },
         heals: (target, amountToHeal) => {
-            target.setHealth(Math.min(MAX_HEALTH, target.getHealth() + amountToHeal))
+            if (target.isAlive())
+            {
+                target.setHealth(Math.min(MAX_HEALTH, target.getHealth() + amountToHeal))
+            }
         }
     }
 }
