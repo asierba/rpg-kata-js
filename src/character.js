@@ -27,6 +27,10 @@ const createCharacter = (level = 1) => {
             if (target.overpowers(this)) {
                 damage = damage / 2
             }
+            if (this.overpowers(target)) {
+                damage = damage * 1.5
+            }
+
             target.setHealth(Math.max(MIN_HEALTH, target.getHealth() - damage))
         },
         heals: (amountToHeal) => {
