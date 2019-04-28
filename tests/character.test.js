@@ -1,5 +1,7 @@
 const { createCharacter } = require('../src/character')
 
+const MAX_HEALTH = 1000
+
 describe('a character', () => {
     describe('when born', () => {
         test('is alive', () => {
@@ -7,7 +9,7 @@ describe('a character', () => {
         })
 
         test('has 1000 health', () => {
-            expect(createCharacter().getHealth()).toBe(1000)
+            expect(createCharacter().getHealth()).toBe(MAX_HEALTH)
         })
 
         test('is level 1', () => {
@@ -56,11 +58,20 @@ describe('a character', () => {
         test('health cannot be raised above 1000', () => {
             aragorn.heals(gimli, 100)
 
-            expect(gimli.getHealth()).toBe(1000)
+            expect(gimli.getHealth()).toBe(MAX_HEALTH)
         })
     })
 
 
+    describe('when damaging itself', () => {
+        test('nothing happens', () => {
+            const aCharacter =  createCharacter()
+
+            aCharacter.damages(aCharacter, 500)
+
+            expect(aCharacter.getHealth()).toBe(MAX_HEALTH)
+        })
+    })
 })
 
 
