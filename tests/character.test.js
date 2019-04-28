@@ -37,6 +37,20 @@ describe('a character', () => {
             expect(gimli.isAlive()).toBe(false)
             expect(gimli.getHealth()).toBe(0)
         })
+
+        test('and the damaged character is healed', () => {
+            aragorn.damages(gimli, 100)
+            aragorn.heals(gimli, 50)
+
+            expect(gimli.getHealth()).toBe(950)
+        })
+
+        test('and a dead character cannot be healed', () => {
+            aragorn.damages(gimli, 1001)
+            aragorn.heals(gimli, 1001)
+
+            expect(gimli.isAlive()).toBe(false)
+        })
     })
 
 
