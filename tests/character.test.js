@@ -60,6 +60,20 @@ describe('a character', () => {
 
             expect(gimli.getHealth()).toBe(MAX_HEALTH)
         })
+
+        describe('when other character level is above 5', () => {
+            let gandalf
+
+            beforeEach(() => {
+                gandalf = createCharacter(6)
+            })
+
+            test('50% health is subtracted from the other character', () => {
+                gimli.damages(gandalf, 100)
+
+                expect(gandalf.getHealth()).toBe(950)
+            })
+        })
     })
 
 
