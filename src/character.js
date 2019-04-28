@@ -13,7 +13,11 @@ const createCharacter = () => {
             health = value
         },
         level: 1,
-        damages: (target, damage) => {
+        damages (target, damage) {
+            if (this === target) {
+                return
+            }
+
             target.setHealth(Math.max(MIN_HEALTH, target.getHealth() - damage))
         },
         heals: (target, amountToHeal) => {
