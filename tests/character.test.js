@@ -51,6 +51,12 @@ describe('a character', () => {
 
             expect(gimli.isAlive()).toBe(false)
         })
+
+        test('health cannot be raised above 1000', () => {
+            aragorn.heals(gimli, 100)
+
+            expect(gimli.getHealth()).toBe(1000)
+        })
     })
 
 
