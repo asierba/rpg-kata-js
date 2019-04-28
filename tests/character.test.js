@@ -42,7 +42,7 @@ describe('a character', () => {
 
         test('and the damaged character is healed', () => {
             aragorn.damages(gimli, 100)
-            aragorn.heals(gimli, 50)
+            gimli.heals(50, gimli)
 
             expect(gimli.getHealth()).toBe(950)
         })
@@ -50,13 +50,13 @@ describe('a character', () => {
         test('and a dead character cannot be healed', () => {
             aragorn.damages(gimli, 1001)
             expect(gimli.isAlive()).toBe(false)
-            aragorn.heals(gimli, 1001)
+            gimli.heals(1001, gimli)
 
             expect(gimli.isAlive()).toBe(false)
         })
 
         test('health cannot be raised above 1000', () => {
-            aragorn.heals(gimli, 100)
+            gimli.heals(100, gimli)
 
             expect(gimli.getHealth()).toBe(MAX_HEALTH)
         })
