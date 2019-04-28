@@ -20,10 +20,14 @@ describe('a character', () => {
     describe('when damaging another character', () => {
         let aragorn
         let gimli
+        let gandalf
+
+
 
         beforeEach(() => {
             aragorn = createCharacter()
             gimli = createCharacter()
+            gandalf = createCharacter(6)
         })
 
         test('health is subtracted from the other character', () => {
@@ -62,16 +66,18 @@ describe('a character', () => {
         })
 
         describe('when other character level is above 5', () => {
-            let gandalf
-
-            beforeEach(() => {
-                gandalf = createCharacter(6)
-            })
-
             test('50% health is subtracted from the other character', () => {
                 gimli.damages(gandalf, 100)
 
                 expect(gandalf.getHealth()).toBe(950)
+            })
+        })
+
+        describe('when other character level is less than 5', () => {
+            test('damage is increased by 50% ', () => {
+                gandalf.damages(gimli, 100)
+
+                expect(gimli.getHealth()).toBe(850)
             })
         })
     })
